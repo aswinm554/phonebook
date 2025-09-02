@@ -1,13 +1,15 @@
 let allContacts = []; // store all contacts
 
-// 1️⃣ Fetch the JSON at the top
-fetch("db.json")
+fetch("https://jsonplaceholder.typicode.com/users")
   .then(res => res.json())
   .then(data => {
-    allContacts = data;        // store contacts
-    displayContacts(allContacts); // render them on page
-  })
-  .catch(err => console.error(err));
+    allContacts = data.map(user => ({
+      id: user.id,
+      name: user.name,
+      phone: user.phone
+    }));
+    displayContacts(allContacts);
+  });
 
 
 async function loadContacts() {
